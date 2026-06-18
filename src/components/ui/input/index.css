@@ -1,0 +1,23 @@
+.input {
+  padding: 9px 15px;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  width: 280px;
+  border: none;
+  opacity: 0.8;
+  font-weight: 300;
+  cursor: pointer;
+  transition: 0.2s all;
+
+  &:focus-within {
+    outline: 4px solid rgb(240, 197, 25);
+  }
+}
+.custom-search{
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  &:focus-within {
+    outline: none;
+  }
+}
