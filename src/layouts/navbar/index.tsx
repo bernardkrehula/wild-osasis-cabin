@@ -1,13 +1,27 @@
+import { useNavigate } from "react-router-dom";
 import "./index.css";
+import NavLink from "./navLink";
+import { navLinksIcons } from "./navLinksIcons";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+
+  const reddirect = (link: string) => {
+    navigate(`/${link}`);
+  };
+
   return (
-    <div className="navbar">
+    <aside className="navbar">
       <div className="logo-content">
-        <img src="./logo2.png" />
-        <h1>Alpine retreat</h1>
+        <img src="./logo.png" />
+        <h1>Alpine Osais</h1>
       </div>
-    </div>
+      <ul className="nav-links">
+        {navLinksIcons.map((icon) => {
+          return <NavLink key={icon.id} icon={icon} reddirect={reddirect}/>;
+        })}
+      </ul>
+    </aside>
   );
 };
 export default NavBar;
