@@ -1,0 +1,18 @@
+.icon{
+    cursor: pointer;
+    color: var(--icons-color);
+}
+.secondary{
+    cursor: pointer;
+    height: 33px;
+    width: 33px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: 0.2s all;
+}
+.secondary:hover{
+    background-color: rgba(125, 125, 125, 0.1);
+}
+.active{
+    outline: 2px solid var(--icons-color);
+}
