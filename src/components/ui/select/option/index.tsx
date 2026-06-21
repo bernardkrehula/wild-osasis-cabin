@@ -1,9 +1,8 @@
 import './index.css';
 
-const Option = ({option}) => {
-  
+const Option = ({name, content}) => {
     return(
-        <option className='option'>{option}</option> 
+        <option className='option' value={name}>{content}</option> 
     )
 }
 export default Option;
