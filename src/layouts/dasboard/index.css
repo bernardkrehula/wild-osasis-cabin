@@ -1,0 +1,31 @@
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+.dashboard-content main {
+  flex: 1;
+  overflow-y: auto;
+}
+main::-webkit-scrollbar {
+  width: 10px;
+}
+
+main::-webkit-scrollbar-track {
+  background: #2f2f4f;        
+  border-radius: 4px;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: #4a4a6a;       
+  border-radius: 10px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  background: #6a6a9a;        
+}
