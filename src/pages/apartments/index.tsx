@@ -106,7 +106,11 @@ const Apartments = () => {
     setInputsValue(formValue)
     console.log(formValue)
   }
-
+  const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputsValue(prev => ({...prev, [name]: value}))
+  }
 
   return (
     <div className="apartments">
