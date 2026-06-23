@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import "./index.css";
-import Icon from "./Icon";
-import type { ActiveIconType } from "../../types/header.types.ts/ActiveIconType";
-import { USER } from "../../config/userConfig";
+import type { ActiveIconType } from "#/types/header.types.ts/ActiveIconType";
+import { USER } from "#/config/userConfig";
+import { TbLogout } from "react-icons/tb";
+import { RiMoonLine } from "react-icons/ri";
+import { RiSunLine } from "react-icons/ri";
+import { RiUser3Line } from "react-icons/ri";
 
 const Header = () => {
   const [theme, setTheme] = useState<boolean>(false);
   const [activeIcon, setActiveIcon] = useState<ActiveIconType>({
     user: false,
-    blackTheme: false,
-    whiteTheme: false,
+    theme: false,
     logout: false,
   });
-  const changeTheme = () => {
+  const changeTheme = (e: React.MouseEvent<HTMLLIElement>) => {
     setTheme((prev) => !prev);
+    handleActiveIcon(e);
   };
   const handleActiveIcon = (e: React.MouseEvent<HTMLLIElement>) => {
     const name = e.currentTarget.dataset.name;
@@ -33,21 +36,23 @@ const Header = () => {
       <h1>{USER.name}</h1>
       <ul className="icons">
         <li data-name="user" onClick={handleActiveIcon}>
-          <Icon name="user" variation="secondary" activeIcon={activeIcon} />
+          <RiUser3Line className={`icon secondary ${activeIcon.user && "active"}`}/>
         </li>
-        <li
-          data-name={`${!theme ? "whiteTheme" : "blackTheme"}`}
-          onClick={handleActiveIcon}
-        >
-          <Icon
-            name={`${theme ? "whiteTheme" : "blackTheme"}`}
-            onClick={changeTheme}
-            activeIcon={activeIcon}
-            variation="secondary"
-          />
+        <li data-name="theme" onClick={changeTheme}>
+          {theme ? (
+            <RiSunLine
+              className={`icon secondary ${activeIcon.theme && "active"}`}
+            />
+          ) : (
+            <RiMoonLine
+              className={`icon secondary ${activeIcon.theme && "active"}`}
+            />
+          )}
         </li>
         <li data-name="logout" onClick={handleActiveIcon}>
-          <Icon name="logout" activeIcon={activeIcon} variation="secondary" />
+          <TbLogout
+            className={`icon secondary ${activeIcon.logout && "active"}`}
+          />
         </li>
       </ul>
     </header>
