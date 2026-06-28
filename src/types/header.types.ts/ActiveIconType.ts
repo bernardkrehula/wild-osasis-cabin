@@ -1,6 +1,5 @@
 export type ActiveIconType = {
     user: boolean;
-    blackTheme: boolean;
-    whiteTheme: boolean;
+    theme: boolean;
     logout: boolean;
 }
