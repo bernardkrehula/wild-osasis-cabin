@@ -1,4 +1,13 @@
+import type React from "react";
+
 export type NavLinkType = {
-  icon: { id: string; name: string; svg: React.ReactNode };
-  reddirect: (value: string) => void;
+  icon: { id: string; name: string; path: React.ReactNode };
+  reddirect: (e: React.MouseEvent<HTMLLIElement>) => void;
+  activeLink: {
+    home: boolean;
+    bookings: boolean;
+    apartments: boolean;
+    users: boolean;
+    settings: boolean;
+  };
 };
