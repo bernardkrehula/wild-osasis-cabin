@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Btn from "#/components/ui/btn";
-import Select from "#/components/ui/select";
 import {
   aparmnetsDiscount,
   apartmentsSort,
@@ -10,15 +9,32 @@ import Apartment from "./apartment";
 import { useSearchParams } from "react-router-dom";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { requestApartments } from "#/api/requestApartmets";
-import type { ActiveIcon } from "#/types/pagest.types.ts/ApartmentPage.types.ts/ActiveIcon.type";
+import type { ActiveApratmentFilter } from "#/types/pagest.types.ts/ApartmentPage.types.ts/ActiveApratmentFilter.type";
 import type { ApartmentType } from "#/types/pagest.types.ts/ApartmentPage.types.ts/Apartment.type";
 import ApartmentModal from "./apartment/apartmentModal";
 import { getFormData } from "#/utils/getFormData";
 import { requestAddNewApartment } from "#/api/requestAddNewApartment";
+import Filters from "#/components/ui/filters";
+import Sort from "#/components/ui/sort";
+import Table from "#/components/ui/table";
+import { theadData } from "./apartmentsTableData";
+
+const columns = [
+  {
+    key: "img",
+    className: "img-td",
+    render: (row) => <img src={row.img} alt={row.name} />,
+  },
+  { key: "id", className: "id-td" },
+  { key: "name", className: "name-td" },
+  { key: "capacity", className: "capacity-td" },
+  { key: "price", className: "price-td" },
+  { key: "discount", className: "discount-td" },
+];
 
 const Apartments = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [activeIcon, setActiveIcon] = useState<ActiveIcon>({
+  const [activeIcon, setActiveIcon] = useState<ActiveApratmentFilter>({
     all: true,
     noDiscount: false,
     withDiscount: false,
@@ -76,32 +92,24 @@ const Apartments = () => {
   const handleActiveModal = () => {
     setActiveModal((prev) => !prev);
   };
+  //Napraviti komponentu filters(odradeno) i sort(odradeno, preimenovana select componenta)
+  //Sa tables napraviti da bude reusable u bookings
+  //Table, tablehead, tablebody, tablerow
+  //Filters, sort
 
   return (
     <div className="apartments">
       <div className="apartments-header">
         <h1>All apartments</h1>
-        <menu>
-          {aparmnetsDiscount.map((discount) => {
-            const { name, content, id } = discount;
-            return (
-              <Btn
-                type="button"
-                key={name}
-                onClick={() => handleDiscount(name, id)}
-                variation="ghost"
-                size="md"
-                active={`${activeIcon[id as keyof ActiveIcon] && "act"}`}
-                name={name}
-              >
-                {content}
-              </Btn>
-            );
-          })}
-        </menu>
-        <Select onChange={setSort} options={apartmentsSort} size="md" />
+        <Filters
+          filtersData={aparmnetsDiscount}
+          handleFilter={handleDiscount}
+          activeFilter={activeIcon}
+        />
+        <Sort onChange={setSort} options={apartmentsSort} size="md" />
       </div>
-      <table className="apartments-table">
+      <Table theadData={theadData} tbodyData={apartments} columns={columns} />
+      {/* <table className="apartments-table">
         <thead className="apartments-table-header">
           <tr>
             <th className="apartment-th">Apartment</th>
@@ -120,7 +128,7 @@ const Apartments = () => {
             />
           );
         })}
-      </table>
+      </table> */}
       {activeModal && (
         <ApartmentModal
           activeModal={activeModal}
