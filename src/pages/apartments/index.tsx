@@ -27,9 +27,17 @@ const columns = [
   },
   { key: "id", className: "id-td" },
   { key: "name", className: "name-td" },
-  { key: "capacity", className: "capacity-td" },
-  { key: "price", className: "price-td" },
-  { key: "discount", className: "discount-td" },
+  {
+    key: "capacity",
+    className: "capacity-td",
+    render: (row) => `Fits up to ${row.capacity} guests`,
+  },
+  { key: "price", className: "price-td", render: (row) => `$${row.price}` },
+  {
+    key: "discount",
+    className: "discount-td",
+    render: (row) => `$${row.discount}`,
+  },
 ];
 
 const Apartments = () => {
